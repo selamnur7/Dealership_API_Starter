@@ -2,6 +2,7 @@ package com.ps.dealership_api_starter.data.mysql;
 
 import com.ps.dealership_api_starter.data.DealershipDao;
 import com.ps.dealership_api_starter.models.Dealership;
+import com.ps.dealership_api_starter.models.Vehicle;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -18,6 +19,7 @@ public class MySqlDealershipDao extends MySqlDaoBase implements DealershipDao {
     {
         super(dataSource);
     }
+
 
     @Override
     public List<Dealership> search(String name, String phone)

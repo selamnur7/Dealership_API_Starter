@@ -1,8 +1,11 @@
 package com.ps.dealership_api_starter.data.mysql;
 
+import com.ps.dealership_api_starter.models.Vehicle;
+
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 public abstract class MySqlDaoBase
 {
@@ -17,4 +20,5 @@ public abstract class MySqlDaoBase
     {
         return dataSource.getConnection();
     }
+
 }
