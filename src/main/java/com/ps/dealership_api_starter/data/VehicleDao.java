@@ -1,6 +1,7 @@
 package com.ps.dealership_api_starter.data;
 
 import com.ps.dealership_api_starter.data.mysql.MySqlDaoBase;
+import com.ps.dealership_api_starter.models.Dealership;
 import com.ps.dealership_api_starter.models.Vehicle;
 import org.springframework.stereotype.Component;
 
@@ -17,6 +18,25 @@ public class VehicleDao extends MySqlDaoBase {
         super(dataSource);
     }
 
+    public Vehicle getByVin(int vin)
+    {
+        String sql = "SELECT * FROM vehicles WHERE vin = ?";
+        try (Connection connection = getConnection())
+        {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, vin);
+
+            ResultSet row = statement.executeQuery();
+
+
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        return null;
+    }
     public List<Vehicle> searchByPrice (double min, double max) {
         List<Vehicle> vehicles = new ArrayList<>();
         String sql = "SELECT * FROM vehicles WHERE price BETWEEN ? AND ?";
@@ -173,7 +193,7 @@ public class VehicleDao extends MySqlDaoBase {
             sql.printStackTrace();
         }
     }
-    public int createVehicle(Vehicle vehicle) {
+    public Vehicle createVehicle(Vehicle vehicle) {
         int generatedId = -1;
         try (
                 Connection connection = getConnection();
@@ -201,6 +221,6 @@ public class VehicleDao extends MySqlDaoBase {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return generatedId;
+        return vehicle;
     }
 }
